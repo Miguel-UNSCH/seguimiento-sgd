@@ -1,0 +1,19 @@
+services:
+  seguimiento:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - .env 
+    ports:
+      - "3000:3000"
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge
