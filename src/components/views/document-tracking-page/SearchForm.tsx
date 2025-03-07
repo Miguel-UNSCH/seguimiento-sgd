@@ -29,7 +29,7 @@ export default function SearchForm({ onSearch, loading }: SearchFormProps) {
         </div>
         <Input
           type="text"
-          placeholder="N° expediente Ejm.( 000002, 2 )"
+          placeholder="N° expediente Ejm.( GGOTIC20250000001 )"
           className="pl-10 h-12 rounded-md border-input bg-input"
           value={expedienteId}
           onChange={(e) => setExpedienteId(e.target.value)}

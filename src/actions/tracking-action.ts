@@ -29,12 +29,12 @@ interface PropsTracking {
 
 export async function getTrackingDocument({ record }: PropsTracking) {
   try {
-    const formattedRecord = Number(record).toString().padStart(10, "0");
+    // const formattedRecord = Number(record).toString().padStart(10, "0");
 
     const result = await query<TrackingDocument>(
       `
       SELECT
-      rem.nu_sec_exp expidiente_rem,
+      trr.nu_expediente  expidiente_rem,
       co_tip_doc_adm || '-' || doc.cdoc_desdoc documento,
       de_asu asunto,
       emp.cemp_co_cargo || '-' || c.ccar_descar cargo,
@@ -51,7 +51,7 @@ export async function getTrackingDocument({ record }: PropsTracking) {
           AND de_tab = 'TDTV_REMITOS'
       ) estado_doc,
       rem.co_dep_emi || '-' || dep.de_dependencia unidad_organica,
-      co_emp_emi || '-' || emp.cemp_apepat || ' ' || emp.cemp_apemat || ' ' || emp.cemp_denom usuario_firma,
+      rem.co_emp_emi || '-' || emp.cemp_apepat || ' ' || emp.cemp_apemat || ' ' || emp.cemp_denom usuario_firma,
       co_emp_res || '-' || (
         select
           r.cemp_apepat || ' ' || r.cemp_apemat || ' ' || r.cemp_denom
@@ -86,28 +86,27 @@ export async function getTrackingDocument({ record }: PropsTracking) {
         where
           e.cemp_codemp = des.co_emp_des
       ) empleado_destino,
-      des.de_pro indicaciones,
-      moti.de_mot motivo_tramite,
-      prio.de_pri codigo_prioridad
-    FROM
-      idosgd.tdtv_remitos rem
-      inner join idosgd.tdtv_destinos des on rem.nu_emi = des.nu_emi
-      inner join idosgd.si_mae_local loc on rem.co_loc_emi = loc.ccod_local
-      inner join idosgd.rhtm_per_empleados emp on rem.co_emp_emi = emp.cemp_codemp
-      inner join idosgd.rhtm_cargos c on emp.cemp_co_cargo = c.ccar_co_cargo
-      inner join idosgd.rhtm_dependencia dep on rem.co_dep_emi = dep.co_dependencia
-      inner join idosgd.si_mae_tipo_doc doc on rem.co_tip_doc_adm = doc.cdoc_tipdoc
-      inner join idosgd.tdtr_prioridad prio on prio.co_pri = des.co_pri
-      inner join idosgd.tdtr_motivo moti on moti.co_mot = des.co_mot
-      WHERE
-        rem.nu_sec_exp LIKE $1
+      des.de_pro indicaciones
+      FROM
+        idosgd.tdtv_remitos rem
+        inner join idosgd.tdtv_destinos des on rem.nu_emi = des.nu_emi
+        inner join idosgd.si_mae_local loc on rem.co_loc_emi = loc.ccod_local
+        inner join idosgd.rhtm_per_empleados emp on rem.co_emp_emi = emp.cemp_codemp
+        inner join idosgd.rhtm_cargos c on emp.cemp_co_cargo = c.ccar_co_cargo
+        inner join idosgd.rhtm_dependencia dep on rem.co_dep_emi = dep.co_dependencia
+        inner join idosgd.si_mae_tipo_doc doc on rem.co_tip_doc_adm = doc.cdoc_tipdoc
+        inner join idosgd.tdtx_remitos_resumen trr on rem.nu_emi = trr.nu_emi 
+      where
+        trr.nu_expediente = $1
         AND rem.es_doc_emi NOT IN ('5', '7', '9')
-      ORDER BY
+      order by
         rem.nu_emi desc,
-        rem.nu_cor_emi desc;
+        rem.nu_cor_emi;
       `,
-      [`%${formattedRecord}`]
+      [`${record}`]
     );
+
+    console.log(record);
 
     return result;
   } catch (error) {
