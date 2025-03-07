@@ -13,15 +13,10 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
+import { Session } from "next-auth";
 
-function AvatarUser() {
-
-  const session = useSession();
-  
-  if (!session) return null;
-
-  if (session.status !== "authenticated") return null;
+function AvatarUser({session}:{session: Session}) {
 
   return (
     <DropdownMenu>
@@ -36,7 +31,7 @@ function AvatarUser() {
       <DropdownMenuContent className="w-56 mr-4 mt-2 border">
         <DropdownMenuLabel>Mi cuenta</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <h2 className="p-4 text-center font-bold">{session.data.user.user}</h2>
+        <h2 className="p-4 text-center font-bold">{session.user.user}</h2>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="w-full p-0 mb-2">
           <Button onClick={() => signOut({

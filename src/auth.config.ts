@@ -13,7 +13,6 @@ const authConfig: NextAuthConfig = {
         password: { label: "Contraseña", type: "password" },
       },
       authorize: async (credentials) => {
-        // Validar las credenciales usando el esquema de Zod
         const { data, success } = signInSchema.safeParse(credentials);
 
         if (!success) {
@@ -30,20 +29,13 @@ const authConfig: NextAuthConfig = {
           );
 
           const user = result[0];
-
           if (!user || !user.cclave) {
             throw new Error("Credenciales incorrectas");
           }
-
-          // Desencriptar la contraseña almacenada
           const decryptedPassword = descifrar(user.cclave);
-
-          // Comparar la contraseña desencriptada con la ingresada
           if (decryptedPassword !== password) {
             throw new Error("Credenciales incorrectas");
           }
-
-          // Retornar el objeto del usuario para la sesión
           return {
             id: user.cod_user.toString(),
             user: user.cdes_user,
@@ -55,7 +47,6 @@ const authConfig: NextAuthConfig = {
       },
     }),
   ],
-  // Otras configuraciones de NextAuth si es necesario
 };
 
 export default authConfig;

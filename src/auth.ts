@@ -5,30 +5,29 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ...authConfig,
   session: {
     strategy: "jwt",
-    maxAge: 30 * 60, // Tiempo de expiracón 30 min
-    updateAge: 10 * 60, // Actualiza el tiempo de expiración cada 10 min
+    maxAge: 2 * 60 * 60,
+    updateAge: 10 * 60,
   },
   trustHost: true,
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        // Verificar que user.id no sea undefined
         if (user.id) {
-          token.id = user.id;  // Asignar solo si user.id es un string
+          token.id = user.id;
         }
         token.user = user.user;
       }
       return token;
     },
     async session({ session, token }) {
-      session.user.id = token.id; // Incluye el ID en la sesión
-      session.user.user = token.user; //
+      session.user.id = token.id;
+      session.user.user = token.user;
       return session;
     },
     authorized: async ({auth}) => {
       return !!auth
     }
-  },// Configuración de las cookies
+  },
   cookies: {
     sessionToken: {
       name: `${process.env.COOKIE_PREFIX}_session-token`,
@@ -57,7 +56,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     },
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.AUTH_SECRET,
   pages: {
     signIn: "/login",
   },

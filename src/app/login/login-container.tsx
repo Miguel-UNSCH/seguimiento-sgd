@@ -32,7 +32,6 @@ function LoginContainer() {
 
   const onSubmit = async (values: z.infer<typeof signInSchema>) => {
     const res = await loginAction(values);
-    console.log(res);
     setResApi(res);
 
     if (res.success) {

@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import Header from "@/components/layout/Header";
 import { redirect } from "next/navigation";
 
 export default async function MainLayout({
@@ -13,8 +14,9 @@ export default async function MainLayout({
   }
 
   return (
-    <>
+    <div className="h-screen flex flex-col bg-background relative">
+      <Header session={session}/>
       {children}
-    </>
+    </div>
   );
 }
