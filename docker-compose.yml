@@ -1,16 +1,377 @@
 services:
-  seguimiento:
+
+  seguimiento_diresa:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: seguimiento
+    container_name: seguimiento_diresa
     restart: always
     environment:
       - NODE_ENV=production
     env_file:
-      - .env 
+      - ./envs/.env.diresa
     ports:
-      - "3000:3000"
+      - "4000:3000"
+    networks:
+      - web
+
+  seguimiento_draa:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_draa
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.draa
+    ports:
+      - "4001:3000"
+    networks:
+      - web
+
+  seguimiento_drea:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_drea
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.drea
+    ports:
+      - "4002:3000"
+    networks:
+      - web
+
+  seguimiento_drtca:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_drtca
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.drtca
+    ports:
+      - "4003:3000"
+    networks:
+      - web
+
+  seguimiento_gra:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_gra
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.gra
+    ports:
+      - "4004:3000"
+    networks:
+      - web
+
+  seguimiento_munivilcas:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_munivilcas
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.munivilcas
+    ports:
+      - "4005:3000"
+    networks:
+      - web
+
+  seguimiento_prider:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_prider
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.prider
+    ports:
+      - "4006:3000"
+    networks:
+      - web
+
+  seguimiento_redcentro:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_redcentro
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.redcentro
+    ports:
+      - "4007:3000"
+    networks:
+      - web
+
+  seguimiento_redcora:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_redcora
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.redcora
+    ports:
+      - "4008:3000"
+    networks:
+      - web
+
+  seguimiento_redhuamanga:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_redhuamanga
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.redhuamanga
+    ports:
+      - "4009:3000"
+    networks:
+      - web
+
+  seguimiento_redhuanta:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_redhuanta
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.redhuanta
+    ports:
+      - "4010:3000"
+    networks:
+      - web
+
+  seguimiento_redpuquio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_redpuquio
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.redpuquio
+    ports:
+      - "4011:3000"
+    networks:
+      - web
+
+  seguimiento_redsanfrancisco:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_redsanfrancisco
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.redsanfrancisco
+    ports:
+      - "4012:3000"
+    networks:
+      - web
+
+  seguimiento_redsanmiguel:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_redsanmiguel
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.redsanmiguel
+    ports:
+      - "4013:3000"
+    networks:
+      - web
+
+  seguimiento_ugcangallo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_ugcangallo
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.ugcangallo
+    ports:
+      - "4014:3000"
+    networks:
+      - web
+
+  seguimiento_ugfajardo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_ugfajardo
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.ugfajardo
+    ports:
+      - "4015:3000"
+    networks:
+      - web
+
+  seguimiento_ughuamanga:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_ughuamanga
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.ughuamanga
+    ports:
+      - "4016:3000"
+    networks:
+      - web
+
+  seguimiento_ughuancasancos:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_ughuancasancos
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.ughuancasancos
+    ports:
+      - "4017:3000"
+    networks:
+      - web
+
+  seguimiento_ughuanta:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_ughuanta
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.ughuanta
+    ports:
+      - "4018:3000"
+    networks:
+      - web
+
+  seguimiento_uglamar:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_uglamar
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.uglamar
+    ports:
+      - "4019:3000"
+    networks:
+      - web
+
+  seguimiento_uglucanas:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_uglucanas
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.uglucanas
+    ports:
+      - "4020:3000"
+    networks:
+      - web
+
+  seguimiento_ugparinacochas:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_ugparinacochas
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.ugparinacochas
+    ports:
+      - "4021:3000"
+    networks:
+      - web
+
+  seguimiento_ugsarasara:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_ugsarasara
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.ugsarasara
+    ports:
+      - "4022:3000"
+    networks:
+      - web
+
+  seguimiento_ugsucre:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_ugsucre
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.ugsucre
+    ports:
+      - "4023:3000"
+    networks:
+      - web
+
+  seguimiento_ugvilcas:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seguimiento_ugvilcas
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.ugvilcas
+    ports:
+      - "4024:3000"
     networks:
       - web
 
